@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="medical_neomatal_apgar_tree_view" model="ir.ui.view">
+        <field name="name">medical.neomatal.apgar.tree.view</field>
+        <field name="model">medical.neomatal.apgar</field>
+        <field name="arch" type="xml">
+            <list string="Apgar Neonatal">
+                <field name="apgar_minute" string="Minuto Apgar"/>
+                <field name="apgar_respiration" string="Respiración"/>
+                <field name="apgar_activity" string="Actividad"/>
+                <field name="apgar_appearance" string="Apariencia"/>
+                <field name="apgar_pulse" string="Pulso"/>
+                <field name="apgar_scores" string="Puntajes Apgar"/>
+                <field name="apgar_grimace" string="Mueca"/>
+            </list>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="medical_patient_disease_form_view" model="ir.ui.view">
+        <field name="name">medical.patient.disease.form.view</field>
+        <field name="model">medical.patient.disease</field>
+        <field name="arch" type="xml">
+            <form string="Enfermedades">
+                <group string="Principal">
+                    <group>
+                        <field name="pathology_id" string="Patología" />
+                        <field name="disease_severity" string="Severidad" />
+                        <field name="status" string="Estado" />
+                        <field name="is_infectious" string="Es infecciosa" />
+                        <field name="is_active" string="Activa" />
+                    </group>
+                    <group>
+                        <field name="short_comment" string="Comentario" />
+                        <field name="diagnosis_date" string="Fecha de diagnóstico" />
+                        <field name="healed_date" string="Fecha de recuperación" />
+                        <field name="age" string="Edad al diagnóstico" />
+                        <field name="doctor_id" string="Médico responsable" />
+                    </group>
+                </group>
+
+                <group string="Alergias">
+                    <group>
+                        <field name="is_allergic" string="Es alérgico/a" />
+                    </group>
+                    <group>
+                        <field name="allergy_type" string="Tipo de alergia" />
+                    </group>
+                </group>
+
+                <group string="Embarazo">
+                    <group>
+                        <field name="pregnancy_warning" string="Advertencia de embarazo" />
+                    </group>
+                    <group>
+                        <field name="week_of_pregnancy" string="Semana de embarazo" />
+                    </group>
+                </group>
+
+                <group string="Tratamiento">
+                    <group>
+                        <field name="is_on_treatment" string="Bajo tratamiento" />
+                        <field name="treatment_description" string="Descripción del tratamiento" />
+                    </group>
+                    <group>
+                        <field name="date_start_treatment" string="Inicio del tratamiento" />
+                        <field name="date_stop_treatment" string="Fin del tratamiento" />
+                    </group>
+                </group>
+
+                <group string="Información adicional">
+                    <field name="extra_info" nolabel="1" colspan="2"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="medical_patient_disease_tree_view" model="ir.ui.view">
+        <field name="name">medical.patient.disease.tree.view</field>
+        <field name="model">medical.patient.disease</field>
+        <field name="arch" type="xml">
+            <list string="Enfermedades">
+                <field name="pathology_id" string="Patología"/>
+                <field name="status" string="Estado"/>
+                <field name="is_active" string="Activa"/>
+                <field name="is_infectious" string="Infecciosa"/>
+                <field name="disease_severity" string="Severidad"/>
+                <field name="pregnancy_warning" string="Advertencia de embarazo"/>
+                <field name="diagnosis_date" string="Fecha de diagnóstico"/>
+                <field name="date_stop_treatment" string="Fin del tratamiento"/>
+                <field name="short_comment" string="Comentario"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_medical_patient_disease" model="ir.actions.act_window">
+        <field name="name">Enfermedades</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">medical.patient.disease</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

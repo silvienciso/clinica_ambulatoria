@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="medical_patient_evaluation_form_view" model="ir.ui.view">
+        <field name="name">medical.patient.evaluation.form.view</field>
+        <field name="model">medical.patient.evaluation</field>
+        <field name="arch" type="xml">
+            <form string="Evaluación del Paciente">
+                <sheet>
+                    <notebook>
+                        <page string="Información Principal">
+                            <group>
+                                <group>
+                                    <field name="medical_patient_id" string="Paciente"/>
+                                    <field name="start_evaluation" string="Inicio de evaluación" required="1"/>
+                                    <field name="chief_complaint" string="Motivo de consulta" required="1"/>
+                                </group>
+                                <group>
+                                    <field name="evaluation_type" string="Tipo de evaluación"/>
+                                    <field name="end_evaluation" string="Fin de evaluación"/>
+                                    <field name="physician_partner_id" string="Médico responsable"/>
+                                </group>
+                            </group>
+                            <group string="Resumen de evaluación">
+                                <field name="evaluation_summary" nolabel="1"/>
+                            </group>
+                        </page>
+
+                        <page string="Signos">
+                            <group string="Signos vitales">
+                                <group>
+                                    <field name="temperature" string="Temperatura"/>
+                                    <field name="diastolic" string="Presión diastólica"/>
+                                    <field name="respiratory_rate" string="Frecuencia respiratoria"/>
+                                </group>
+                                <group>
+                                    <field name="systolic" string="Presión sistólica"/>
+                                    <field name="bpm" string="Frecuencia cardíaca (BPM)"/>
+                                    <field name="osat" string="Saturación de oxígeno"/>
+                                </group>
+                            </group>
+
+                            <group string="Nutrición">
+                                <group>
+                                    <field name="malnutrition" string="Desnutrición"/>
+                                </group>
+                                <group>
+                                    <field name="dehydration" string="Deshidratación"/>
+                                </group>
+                            </group>
+
+                            <group string="Antropometría">
+                                <group>
+                                    <field name="weight" string="Peso"/>
+                                    <field name="abdominal_circ" string="Circunferencia abdominal"/>
+                                    <field name="bmi" string="Índice de masa corporal (IMC)"/>
+                                </group>
+                                <group>
+                                    <field name="height" string="Altura"/>
+                                    <field name="head_circumference" string="Perímetro cefálico"/>
+                                </group>
+                            </group>
+
+                            <group string="Glucosa">
+                                <group>
+                                    <field name="glycemia" string="Glucemia"/>
+                                </group>
+                                <group>
+                                    <field name="hba1c" string="Hemoglobina glicosilada (HbA1c)"/>
+                                </group>
+                            </group>
+
+                            <group string="Lípidos">
+                                <group>
+                                    <field name="cholesterol_total" string="Colesterol total"/>
+                                    <field name="ldl" string="LDL"/>
+                                </group>
+                                <group>
+                                    <field name="hdl" string="HDL"/>
+                                    <field name="tag" string="Triglicéridos (TAG)"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Síntomas">
+                            <group string="Dolor">
+                                <group>
+                                    <field name="symptom_pain" string="Dolor"/>
+                                </group>
+                                <group>
+                                    <field name="symptom_pain_intensity" string="Intensidad del dolor"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Estado Mental">
+                            <group string="Escala de Coma de Glasgow">
+                                <group>
+                                    <field name="loc" string="Respuesta verbal"/>
+                                    <field name="loc_verbal" string="Respuesta verbal detallada"/>
+                                </group>
+                                <group>
+                                    <field name="loc_eyes" string="Apertura ocular"/>
+                                    <field name="loc_motor" string="Respuesta motora"/>
+                                </group>
+                            </group>
+                            <group string="Evaluación mental y deterioros">
+                                <group>
+                                    <field name="mood" string="Estado de ánimo"/>
+                                    <field name="orientation" string="Orientación"/>
+                                    <field name="knowledge_current_events" string="Conocimiento de eventos actuales"/>
+                                    <field name="abstraction" string="Abstracción"/>
+                                    <field name="calculation_ability" string="Cálculo mental"/>
+                                    <field name="praxis" string="Praxis"/>
+                                </group>
+                                <group>
+                                    <field name="violent" string="Conducta violenta"/>
+                                    <field name="memory" string="Memoria"/>
+                                    <field name="judgment" string="Juicio"/>
+                                    <field name="vocabulary" string="Vocabulario"/>
+                                    <field name="object_recognition" string="Reconocimiento de objetos"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Diagnóstico">
+                            <group>
+                                <field name="diagnosis_id" string="Diagnóstico"/>
+                            </group>
+                            <group string="Información del diagnóstico">
+                                <field name="info_diagnosis" nolabel="1"/>
+                            </group>
+                            <group string="Plan de tratamiento">
+                                <field name="directions" nolabel="1"/>
+                            </group>
+                            <group string="Procedimientos">
+                                <field name="procedure_ids" nolabel="1" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="user_id" string="Usuario médico"/>
+                                    <field name="medical_appointment_date_id" string="Fecha de consulta"/>
+                                    <field name="derived_to_physician_id" string="Derivado a"/>
+                                </group>
+                                <group>
+                                    <field name="next_appointment_id" string="Próxima cita" domain="[('patient_id', '=', medical_patient_id)]"/>
+                                    <field name="derived_from_physician_id" string="Derivado de"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="medical_patient_evaluation_tree_view" model="ir.ui.view">
+        <field name="name">medical.patient.evaluation.tree.view</field>
+        <field name="model">medical.patient.evaluation</field>
+        <field name="arch" type="xml">
+            <list string="Evaluaciones">
+                <field name="medical_patient_id" string="Paciente"/>
+                <field name="start_evaluation" string="Inicio"/>
+                <field name="end_evaluation" string="Fin"/>
+                <field name="physician_partner_id" string="Médico"/>
+                <field name="chief_complaint" string="Motivo de consulta"/>
+                <field name="bmi" string="IMC"/>
+                <field name="systolic" string="Presión sistólica"/>
+                <field name="diastolic" string="Presión diastólica"/>
+                <field name="diagnosis_id" string="Diagnóstico"/>
+                <field name="next_appointment_id" string="Próxima cita"/>
+            </list>
+        </field>
+    </record>
+</odoo>

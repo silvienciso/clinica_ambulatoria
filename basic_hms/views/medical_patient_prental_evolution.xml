@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="medical_patient_prental_evoultion_tree_view"
+        model="ir.ui.view">
+        <field name="name">medical.patient.prental.evoultion.tree.view</field>
+        <field name="model">medical.patient.prental.evoultion</field>
+        <field name="arch" type="xml">
+            <list string="Evolución Prenatal del Paciente">
+                <field name="evoultion_date" string="Fecha de Evolución" />
+                <field name="gestational_weeks" string="Semanas de Gestación" />
+                <field name="hypertansion" string="Hipertensión" />
+                <field name="preclampsia" string="Preeclampsia" />
+                <field name="overweight" string="Sobrepeso" />
+                <field name="diabetes" string="Diabetes" />
+                <field name="placenta_previa" string="Placenta Previa" />
+                <field name="invasive_placentation" string="Placenta Invasiva" />
+                <field name="vasa_previa" string="Vasa Previa" />
+            </list>
+        </field>
+    </record>
+
+</odoo>

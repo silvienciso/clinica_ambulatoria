@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="medical_insurance_plan_tree_view" model="ir.ui.view">
+        <field name="name">medical.insurance.plan.tree.view</field>
+        <field name="model">medical.insurance.plan</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <list string="Planes de Seguro">
+                <field name="insurance_product_id" string="Producto de Seguro"/>
+                <field name="is_default" string="Por defecto"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="medical_insurance_plan_form_view" model="ir.ui.view">
+        <field name="name">medical.insurance.plan.form.view</field>
+        <field name="model">medical.insurance.plan</field>
+        <field name="arch" type="xml">
+            <form string="Planes de Seguro">
+                <group colspan="4" col="4">
+                    <field name="insurance_product_id" string="Producto de Seguro" required="1"
+                        context="{'search_default_type': 'service','default_type': 'service'}" />
+                    <newline />
+                    <field name="company_partner_id" string="Compañía de Seguro" required="1"
+                        context="{'default_is_insurance_company': 1, 'search_default_is_insurance_company': 1}" />
+                    <field name="is_default" string="Por defecto" />
+                    <newline />
+                    <field name="notes" string="Notas" colspan="4" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+</odoo>

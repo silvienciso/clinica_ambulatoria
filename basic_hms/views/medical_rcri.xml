@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="medical_rcri_form_view" model="ir.ui.view">
+        <field name="name">medical.rcri.form.view</field>
+        <field name="model">medical.rcri</field>
+        <field name="arch" type="xml">
+            <form string="Cirugía">
+                <sheet>
+                    <group colspan="4" col="4">
+                        <field name="patient_id" string="Paciente" required="1" />
+                        <field name="rcri_date" string="Fecha RCRI" />
+                        <field name="rcri_physician_id" string="Médico RCRI" />
+                        <field name="rcri_high_risk_surgery" string="Cirugía de alto riesgo RCRI" />
+                        <field name="rcri_ischemic_history" string="Antecedentes isquémicos RCRI" />
+                        <field name="rcri_congestive_history" string="Antecedentes congestivos RCRI" />
+                        <field name="rcri_diabetes_history" string="Antecedentes de diabetes RCRI" />
+                        <field name="rcri_cerebrov_history" string="Antecedentes cerebrovasculares RCRI" />
+                        <field name="rcri_kidney_history" string="Antecedentes renales RCRI" />
+                        <field name="rcri_total" string="Total RCRI" />
+                        <field name="rcri_class" string="Clase RCRI" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_medical_rcri" model="ir.actions.act_window">
+        <field name="name">RCRI</field>
+        <field name="res_model">medical.rcri</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

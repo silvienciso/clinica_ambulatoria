@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="medical_patient_rounding_form_view" model="ir.ui.view">
+        <field name="name">medical.patient.rounding.form.view</field>
+        <field name="model">medical.patient.rounding</field>
+        <field name="arch" type="xml">
+            <form string="Rondas">
+                <sheet>
+                    <header>
+                        <button name="done_button" states="draft"
+                            string="Finalizar" icon="gtk-execute" type="object"
+                            modifiers="{'invisible': [['state', 'not in', ['draft']]]}" />
+                        <field name="state" readonly="1"
+                            widget="statusbar" statusbar_visible="draft"
+                            modifiers="{'readonly': true}" string="Estado" />
+                    </header>
+                    <notebook>
+                        <page string="Principal" id="rounding_main">
+                            <group colspan="4" id="group_admin_data" string="Datos Administrativos">
+                                <field name="medical_inpatient_registration" string="Registro de Internación Médica" />
+                                <field name="health_physician_id" string="Médico Responsable" />
+                                <field name="evaluation_start" string="Inicio de Evaluación" />
+                                <field name="evaluation_end" string="Fin de Evaluación" />
+                                <field name="environmental_assessment" string="Evaluación Ambiental" />
+                                <field name="icu_patient" string="Paciente en UCI" />
+                                <field name="warning" string="Advertencia" />
+                            </group>
+                            <group colspan="6" col="6" string="Las Seis P">
+                                <field name="pain" string="Dolor" />
+                                <field name="potty" string="Baño" />
+                                <field name="position" string="Posición" />
+                                <field name="proximity" string="Proximidad" />
+                                <field name="pump" string="Bomba" />
+                                <field name="personal_needs" string="Necesidades Personales" />
+                            </group>
+                            <group colspan="6" col="6" string="Signos Vitales">
+                                <field name="temperature" string="Temperatura" />
+                                <field name="systolic" string="Presión Sistólica" />
+                                <field name="diastolic" string="Presión Diastólica" />
+                                <field name="bpm" string="Pulso (BPM)" />
+                                <field name="respiratory_rate" string="Frecuencia Respiratoria" />
+                                <field name="osat" string="Saturación de Oxígeno" />
+                            </group>
+                            <group colspan="6" col="6" string="Otros">
+                                <field name="diuresis" string="Diuresis" />
+                                <field name="urinary_catheter" string="Catéter Urinario" />
+                                <field name="glycemia" string="Glicemia" />
+                                <field name="depression" string="Depresión" />
+                                <field name="evolution" string="Evolución" />
+                            </group>
+                            <group colspan="4" string="Resumen de Ronda">
+                                <field name="round_summary" nolabel="1" colspan="4" string="Resumen" />
+                            </group>
+                        </page>
+                        <page string="UCI">
+                            <group colspan="4" col="6" string="Neurológico">
+                                <field name="gcs" can_create="true" can_write="true" modifiers="{}" string="Escala de Coma Glasgow" />
+                                <field name="pupil_dilation" modifiers="{}" string="Dilación Pupilar" />
+                                <newline />
+                                <field name="right_pupil" modifiers="{}" string="Pupila Derecha" />
+                                <field name="left_pupil" modifiers="{}" string="Pupila Izquierda" />
+                                <field name="anisocoria" string="Anisocoria" />
+                                <newline />
+                                <field name="pupillary_reactivity" modifiers="{}" string="Reactividad Pupilar" />
+                                <field name="pupil_consensual_resp" modifiers="{}" string="Respuesta Pupilar Consensual" />
+                            </group>
+                            <group colspan="4" col="4" string="Respiratorio">
+                                <group colspan="4" col="4">
+                                    <field name="oxygen_mask" modifiers="{}" string="Máscara de Oxígeno" />
+                                    <field name="fio2" modifiers="{}" string="FiO2" />
+                                    <field name="respiration_type" modifiers="{}" string="Tipo de Respiración" />
+                                    <field name="trachea_alignment" modifiers="{}" string="Alineación de la Tráquea" />
+                                    <field name="peep" modifiers="{}" string="PEEP" />
+                                    <field name="sce" modifiers="{}" string="SCE" />
+                                    <field name="oral_mucosa_lesion" modifiers="{}" string="Lesión en Mucosa Oral" />
+                                    <field name="lips_lesion" modifiers="{}" string="Lesión en Labios" />
+                                </group>
+                                <newline />
+                                <group string="Expansión Torácica" colspan="6" col="6">
+                                    <field name="chest_expansion" modifiers="{}" string="Expansión Torácica" />
+                                    <field name="paradoxical_expansion" modifiers="{}" string="Expansión Paradoxal" />
+                                    <field name="tracheal_tug" modifiers="{}" string="Tirón Traqueal" />
+                                </group>
+                                <group string="Radiografía">
+                                    <field name="xray" class="oe_avatar" options="{'size': [90, 90]}" string="Radiografía" />
+                                </group>
+                            </group>
+                            <field name="chest_drainages" colspan="4" modifiers="{}" string="Drenajes Torácicos" />
+                            <field name="chest_drainages" nolabel="1">
+                                <list editable="bottom" string="Drenajes Torácicos">
+                                    <field name="location" string="Ubicación" />
+                                    <field name="suction" string="Succión" />
+                                    <field name="suction_pressure" string="Presión de Succión" />
+                                    <field name="fluid_volumme" string="Volumen de Fluido" />
+                                    <field name="fluid_aspect" string="Aspecto del Fluido" />
+                                    <field name="oscillation" string="Oscilación" />
+                                    <field name="air_leak" string="Fuga de Aire" />
+                                    <field name="remarks" string="Observaciones" />
+                                </list>
+                            </field>
+                            <newline />
+                            <group colspan="4" string="Cardiovascular">
+                                <group colspan="4" col="4">
+                                    <field name="ecg" can_create="true" can_write="true" modifiers="{}" string="ECG" />
+                                </group>
+                                <newline />
+                                <group colspan="6" col="6">
+                                    <field name="venous_access" modifiers="{}" string="Acceso Venoso" />
+                                    <field name="swan_ganz" modifiers="{}" string="Catéter Swan-Ganz" />
+                                    <field name="arterial_access" modifiers="{}" string="Acceso Arterial" />
+                                    <field name="dialysis" modifiers="{}" string="Diálisis" />
+                                    <field name="edema" modifiers="{}" string="Edema" />
+                                </group>
+                            </group>
+                            <group string="Sangre y Piel" colspan="6" col="6">
+                                <field name="bacteremia" modifiers="{}" string="Bacteriemia" />
+                                <field name="ssi" modifiers="{}" string="Infección del Sitio Quirúrgico" />
+                                <field name="wound_dehiscence" modifiers="{}" string="Dehiscencia de Herida" />
+                                <field name="cellulitis" modifiers="{}" string="Celulitis" />
+                                <field name="necrotizing_fasciitis" modifiers="{}" string="Fasciitis Necrotizante" />
+                            </group>
+                            <group string="Digestivo y Abdomen" colspan="8" col="8">
+                                <field name="vomiting" modifiers="{}" string="Vómitos" />
+                                <field name="bowel_sounds" modifiers="{}" string="Ruidos Intestinales" />
+                                <field name="stools" modifiers="{}" string="Heces" />
+                                <field name="peritonitis" modifiers="{}" string="Peritonitis" />
+                            </group>
+                        </page>
+                        <page string="Procedimientos">
+                            <form string="Procedimientos">
+                                <field name="procedures_ids" nolabel="1">
+                                    <list string="Procedimientos">
+                                        <field name="procedure" string="Procedimiento" />
+                                        <field name="notes" string="Notas" />
+                                    </list>
+                                </field>
+                            </form>
+                        </page>
+                        <page string="Medicación">
+                            <group colspan="2" col="2">
+                                <field name="hospital_location_id" string="Ubicación Hospitalaria" />
+                            </group>
+                            <form string="Medicamentos">
+                                <field name="medicaments_ids" nolabel="1">
+                                    <list string="Medicamentos" editable="bottom">
+                                        <field name="medicament_id" string="Medicamento" />
+                                        <field name="quantity" string="Cantidad" />
+                                        <field name="lot_id" string="Lote" />
+                                        <field name="short_comment" string="Comentario Breve" />
+                                        <field name="product_id" string="Producto" />
+                                    </list>
+                                </field>
+                                <field name="medical_supplies_ids" nolabel="1" mode="list">
+                                    <list string="Suministros Médicos" editable="bottom">
+                                        <field name="product_id" string="Producto" />
+                                        <field name="short_comment" string="Comentario Breve" />
+                                        <field name="lot_id" string="Lote" />
+                                        <field name="quantity" string="Cantidad" />
+                                    </list>
+                                </field>
+                                <field name="vaccines_ids" nolabel="1">
+                                    <list string="Vacunas" editable="bottom">
+                                        <field name="vaccine_id" string="Vacuna" />
+                                        <field name="quantity" string="Cantidad" />
+                                        <field name="lot_id" string="Lote" />
+                                        <field name="dose" string="Dosis" />
+                                        <field name="next_dose_date" string="Próxima Dosis" />
+                                        <field name="short_comment" string="Comentario Breve" />
+                                    </list>
+                                </field>
+                            </form>
+                        </page>
+                        <page string="Movimientos de Stock">
+                            <field name="move_ids" string="Movimientos de Stock" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="medical_patient_rounding_tree_view" model="ir.ui.view">
+        <field name="name">medical.patient.rounding.tree.view</field>
+        <field name="model">medical.patient.rounding</field>
+        <field name="arch" type="xml">
+            <list string="Rondas">
+                <field name="warning" string="Advertencia" />
+                <field name="medical_inpatient_registration" string="Registro de Internación Médica" />
+                <field name="evaluation_start" string="Inicio de Evaluación" />
+                <field name="health_physician_id" string="Médico Responsable" />
+                <field name="evolution" string="Evolución" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_medical_patient_rounding" model="ir.actions.act_window">
+        <field name="name">Rondas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">medical.patient.rounding</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_patient_rounding" parent="menu_nursing"
+        action="action_medical_patient_rounding" sequence="0" />
+
+</odoo>

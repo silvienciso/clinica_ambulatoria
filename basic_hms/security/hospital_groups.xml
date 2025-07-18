@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="bi_group_doctor" model="res.groups">
+            <field name="name">Doctor</field>
+            <field name="comment">el usuario tendrá acceso a sus propios datos en Doctor.</field>
+        </record>
+
+        <record id="group_chemist" model="res.groups">
+            <field name="name">Químico</field>
+            <field name="comment">el usuario tendrá acceso a sus propios datos en Químico.</field>
+        </record>
+
+        <record id="group_medical_group" model="res.groups">
+            <field name="name">Grupo Médico</field>
+            <field name="comment">el usuario tendrá acceso a sus propios datos en Grupo Médico.</field>
+        </record>
+
+        <record id="group_receptionist" model="res.groups">
+            <field name="name">Recepcionista</field>
+            <field name="comment">el usuario tendrá acceso a sus propios datos en Recepcionista.</field>
+        </record>
+
+
+    </data>
+</odoo>
