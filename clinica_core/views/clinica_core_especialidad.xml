@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_clinica_core_especialidad_form" model="ir.ui.view">
+        <field name="name">clinica.core.especialidad.form</field>
+        <field name="model">clinica_core.especialidad</field>
+        <field name="arch" type="xml">
+            <form string="Especialidad Médica">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Ej: Cardiología"/></h1>
+                    </div>
+                    <group>
+                        <group string="Configuración de Facturación">
+                            <field name="product_id" domain="[('type','=','service'),('sale_ok','=',True)]"/>
+                        </group>
+                        <group string="Tarifas de Consulta">
+                            <field name="price_coop_member" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="price_general" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Médicos Asociados">
+                            <field name="doctor_ids">
+                                <list string="Médicos" editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Horarios de Atención" name="horarios">
+                            <field name="schedule_ids">
+                                <list editable="bottom">
+                                    <field name="doctor_id" domain="[('id','in', parent.doctor_ids)]"/>
+                                    <field name="weekday"/>
+                                    <field name="start_time" widget="float_time"/>
+                                    <field name="end_time" widget="float_time"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notas Adicionales">
+                            <field name="notes" placeholder="Añadir información relevante sobre la especialidad..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_clinica_core_especialidad_list" model="ir.ui.view">
+        <field name="name">clinica.core.especialidad.list</field>
+        <field name="model">clinica_core.especialidad</field>
+        <field name="arch" type="xml">
+            <list string="Especialidades Médicas">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="price_coop_member"/>
+                <field name="price_general"/>
+                <field name="doctor_ids" widget="many2many_tags"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_clinica_core_especialidad" model="ir.actions.act_window">
+        <field name="name">Especialidades</field>
+        <field name="res_model">clinica_core.especialidad</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea la primera especialidad médica.
+            </p><p>
+            Define las especialidades que ofrece la clínica, como Cardiología, Pediatría, etc., y configura sus tarifas.
+        </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_clinica_configuracion_especialidades"
+            name="Especialidades"
+            parent="menu_clinica_core_configuracion"
+            action="action_clinica_core_especialidad"
+            sequence="20"/>
+
+</odoo>

@@ -104,7 +104,6 @@ class ClinicaCorePaciente(models.Model):
     # appointment_ids = fields.One2many('clinica_core.turno', 'paciente_id', string="Turnos Previos")
     # lab_test_ids = fields.One2many('clinica_core.laboratorio.orden', 'paciente_id', string="Órdenes de Laboratorio")
     # family_history_ids = fields.One2many('clinica_core.paciente.antecedente_familiar', 'paciente_id', string="Antecedentes Familiares")
-    # cage_ids = fields.One2many('clinica_core.paciente.cage', 'paciente_id', string="Cuestionario CAGE")
 
     # -------------------------------------------------------------------------
     # ESTILO DE VIDA

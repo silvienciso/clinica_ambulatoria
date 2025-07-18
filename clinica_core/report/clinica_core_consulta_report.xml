@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_template_consulta">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <style>
+                            .bold{
+                            font-weight:bold;
+                            }
+                            th{
+                            padding:5px !important;
+                            }
+                            td{
+                            padding:5px !important;
+                            }
+                            .text-center{
+                            text-align:center;
+                            }
+                        </style>
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            
+                            <h2 class="bold">Registro de Consulta</h2>
+                            
+                            <div class="row mt32 mb32">
+                                <div class="col-6">
+                                    <strong>Paciente:</strong> <span t-field="doc.patient_id.partner_id.name"/><br/>
+                                    <strong>Nº Registro:</strong> <span t-field="doc.patient_id.name"/>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <strong>Fecha de Consulta:</strong> <span t-field="doc.date" t-options="{'widget': 'datetime'}"/><br/>
+                                    <strong>Médico Tratante:</strong> <span t-field="doc.doctor_id.partner_id.name"/>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="bold">Detalles Clínicos</h3>
+                                <table class="table table-sm table-bordered">
+                                    <tr>
+                                        <th style="width: 25%;" class="bold">Motivo de la Consulta</th>
+                                        <td><span t-field="doc.motivo_consulta"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bold">Síntomas</th>
+                                        <td><span t-field="doc.sintomas"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bold">Diagnóstico Principal</th>
+                                        <td><span t-field="doc.diagnostico_principal"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bold">Plan de Tratamiento</th>
+                                        <td><span t-field="doc.plan_tratamiento"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="mb-4" t-if="doc.prescripcion_ids">
+                                <h3 class="bold">Prescripciones</h3>
+                                <table class="table table-sm table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="bold text-center">Medicamento</th>
+                                            <th class="bold text-center">Indicación / Posología</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.prescripcion_ids" t-as="linea">
+                                            <td><span t-field="linea.medicamento"/></td>
+                                            <td><span t-field="linea.indicacion"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="mb-4" t-if="doc.laboratorio_ids">
+                                <h3 class="bold">Órdenes de Laboratorio</h3>
+                                <table class="table table-sm table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="bold text-center">Análisis Solicitado</th>
+                                            <th class="bold text-center">Notas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.laboratorio_ids" t-as="linea">
+                                            <td><span t-field="linea.analisis_solicitado"/></td>
+                                            <td><span t-field="linea.notas"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="row" style="margin-top:100px">
+                                <div class="col-4 offset-8 text-center">
+                                    <hr style="border-top: 1px solid black;"/>
+                                    <strong>Firma del Médico</strong>
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_report_consulta" model="ir.actions.report">
+            <field name="name">Imprimir Consulta</field>
+            <field name="model">clinica_core.consulta</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">clinica_core.report_template_consulta</field>
+            <field name="report_file">clinica_core.report_template_consulta</field>
+            <field name="print_report_name">(object.patient_id.partner_id.name or 'Consulta').replace('/','_')</field>
+            <field name="binding_model_id" ref="model_clinica_core_consulta"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

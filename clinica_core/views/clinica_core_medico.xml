@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_clinica_core_medico_form" model="ir.ui.view">
+        <field name="name">clinica.core.medico.form</field>
+        <field name="model">clinica_core.medico</field>
+        <field name="arch" type="xml">
+            <form string="Médico">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" context="{'default_is_doctor': 1}"/>
+                            <field name="code"/>
+                        </group>
+                    </group>
+                    <group string="Especialidades">
+                        <field name="speciality_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Horarios de Atención" name="horarios">
+                            <field name="schedule_ids">
+                                <list editable="bottom">
+                                    <field name="speciality_id" domain="[('id', 'in', parent.speciality_ids)]"/>
+                                    <field name="weekday"/>
+                                    <field name="start_time" widget="float_time"/>
+                                    <field name="end_time" widget="float_time"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Información Adicional">
+                            <field name="info" placeholder="Añadir notas o información relevante sobre el profesional..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_clinica_core_medico_list" model="ir.ui.view">
+        <field name="name">clinica.core.medico.list</field>
+        <field name="model">clinica_core.medico</field>
+        <field name="arch" type="xml">
+            <list string="Médicos">
+                <field name="partner_id"/>
+                <field name="code"/>
+                <field name="speciality_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_clinica_core_medico" model="ir.actions.act_window">
+        <field name="name">Médicos</field>
+        <field name="res_model">clinica_core.medico</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aún no hay médicos registrados.
+            </p><p>
+            Crea el perfil de cada médico para poder asignarlos a especialidades y turnos.
+        </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_clinica_configuracion_medicos"
+            name="Médicos"
+            parent="menu_clinica_core_configuracion"
+            action="action_clinica_core_medico"
+            sequence="10"/>
+
+</odoo>

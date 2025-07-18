@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_clinica_core_consulta_list" model="ir.ui.view">
+        <field name="name">clinica.core.consulta.list</field>
+        <field name="model">clinica_core.consulta</field>
+        <field name="arch" type="xml">
+            <list string="Consultas Clínicas">
+                <field name="display_name" string="Consulta"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="date"/>
+                <field name="appointment_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_clinica_core_consulta_form" model="ir.ui.view">
+        <field name="name">clinica.core.consulta.form</field>
+        <field name="model">clinica_core.consulta</field>
+        <field name="arch" type="xml">
+            <form string="Consulta Clínica">
+                <header>
+                    <button name="action_finish_consultation" string="Finalizar" type="object" class="oe_highlight"
+                            invisible="state != 'in_progress'"/>
+                    <button name="%(clinica_core.action_report_consulta)d" string="Imprimir Consulta" type="action" class="btn-primary"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="display_name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="doctor_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="appointment_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detalles Clínicos">
+                            <group>
+                                <field name="motivo_consulta" placeholder="Ej: Dolor de cabeza y fiebre..."/>
+                                <field name="sintomas" placeholder="Detalles de la evolución de los síntomas..."/>
+                                <field name="diagnostico_principal" placeholder="Ej: Faringitis viral..."/>
+                                <field name="plan_tratamiento" placeholder="Ej: Reposo, hidratación y paracetamol..."/>
+                            </group>
+                        </page>
+                        <page string="Prescripciones">
+                            <field name="prescripcion_ids">
+                                <list editable="bottom">
+                                    <field name="medicamento"/>
+                                    <field name="indicacion"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Órdenes de Laboratorio">
+                            <field name="laboratorio_ids">
+                                <list editable="bottom">
+                                    <field name="analisis_solicitado"/>
+                                    <field name="notas"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                 <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_clinica_core_consulta_search" model="ir.ui.view">
+        <field name="name">clinica.core.consulta.search</field>
+        <field name="model">clinica_core.consulta</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Consultas">
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="appointment_id"/>
+                <separator/>
+                <group expand="0" string="Agrupar por...">
+                    <filter string="Médico" name="group_by_medico" context="{'group_by':'doctor_id'}"/>
+                    <filter string="Paciente" name="group_by_paciente" context="{'group_by':'patient_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_clinica_core_consulta" model="ir.actions.act_window">
+        <field name="name">Historial de Consultas</field>
+        <field name="res_model">clinica_core.consulta</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_clinica_core_consulta_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aún no hay consultas registradas.
+            </p><p>
+                Las consultas se crean desde la vista de "Pacientes en Espera" al atender un turno.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_clinica_historial_consultas"
+        name="Historial de Consultas"
+        parent="menu_clinica_consultorio"
+        action="action_clinica_core_consulta"
+        sequence="20"/>
+
+</odoo>

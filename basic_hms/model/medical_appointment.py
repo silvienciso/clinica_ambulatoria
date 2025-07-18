@@ -138,7 +138,3 @@ class medical_appointment(models.Model):
 		else:
 			 raise UserError(_(' The Appointment is invoice exempt'))
 		return result
-
-	
-		
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

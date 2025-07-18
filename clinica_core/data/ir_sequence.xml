@@ -4,8 +4,15 @@
         <record id="clinica_core_paciente_sequence" model="ir.sequence">
             <field name="name">Secuencia de Pacientes</field>
             <field name="code">seq_clinica_core_paciente</field>
-            <field name="prefix">PAC</field>
+            <field name="prefix">PAC/</field>
             <field name="padding">4</field>
+        </record>
+
+        <record id="clinica_core_turno_sequence" model="ir.sequence">
+            <field name="name">Secuencia de Turnos</field>
+            <field name="code">seq_clinica_core_turno</field>
+            <field name="prefix">TUR/</field>
+            <field name="padding">7</field>
         </record>
     </data>
 </odoo>

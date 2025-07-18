@@ -179,8 +179,8 @@
         </field>
     </record>
 
-    <record id="clinica_core_paciente_tree_view" model="ir.ui.view">
-        <field name="name">clinica.core.paciente.tree.view</field>
+    <record id="clinica_core_paciente_list_view" model="ir.ui.view">
+        <field name="name">clinica.core.paciente.list.view</field>
         <field name="model">clinica_core.paciente</field>
         <field name="arch" type="xml">
             <list string="Información del Paciente">
