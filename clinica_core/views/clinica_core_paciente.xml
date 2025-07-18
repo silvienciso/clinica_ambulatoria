@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="clinica_core_paciente_form_view" model="ir.ui.view">
+        <field name="name">clinica.core.paciente.form.view</field>
+        <field name="model">clinica_core.paciente</field>
+        <field name="arch" type="xml">
+            <form string="Paciente">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title mb24">
+                        <div class="oe_edit_only">
+                            <label for="partner_id" />
+                        </div>
+                        <h1>
+                            <field name="partner_id"
+                                   default_focus="1" placeholder="Nombre del paciente"
+                                   context="{'default_is_patient': 1,'default_is_person': 1}" />
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="name" string="Nombre completo"/>
+                            <field name="date_of_birth" string="Fecha de nacimiento"/>
+                            <field name="marital_status" string="Estado civil"/>
+                        </group>
+
+                        <group>
+                            <field name="sex" string="Sexo"/>
+                            <field name="age" string="Edad" readonly="1"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Calle..." class="o_address_street" />
+                                <field name="street2" placeholder="Calle 2..." class="o_address_street" />
+                                <field name="city" placeholder="Ciudad" class="o_address_city" />
+                                <field name="state_id" class="o_address_state" placeholder="Departamento" options="{&quot;no_open&quot;: True}" />
+                                <field name="country_id" placeholder="País" class="o_address_country"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Información General">
+                            <group string="Información General del Paciente">
+                                <group>
+                                    <field name="blood_type" string="Tipo de Sangre"/>
+                                    <field name="rh" string="Factor RH"/>
+                                    <!--field name="current_insurance_id" string="Seguro Médico"/-->
+                                </group>
+                                <group>
+                                    <!--field name="primary_care_physician_id" string="Médico de Cabecera"/-->
+                                </group>
+                            </group>
+
+                            <group colspan="4" string="Información Adicional del Paciente">
+                                <field colspan="4" name="general_info" nolabel="1" />
+                                <newline />
+                            </group>
+                        </page>
+
+                        <!--page string="Enfermedades">
+                            <field name="patient_disease_ids" nolabel="1" widget="section_and_note_one2many"/>
+                        </page-->
+
+                        <page string="Gineco / Obstetricia" invisible="sex != 'f'">
+                            <group string="Ginecología">
+                                <group string="General">
+                                    <field name="fertile" string="Fértil"/>
+                                    <field name="menarche" string="Menarquía"/>
+                                    <field name="menarche_age" invisible="not menarche"/>
+                                    <field name="menopause" string="Menopausia"/>
+                                    <field name="menopause_age" invisible="not menopause"/>
+                                </group>
+                                <group string="Prevención y Exámenes">
+                                    <field name="breast_self_examination" string="Autoexploración mamaria"/>
+                                    <newline/>
+                                    <field name="mammography" string="Mamografía"/>
+                                    <field name="mammography_last" string="Última mamografía"/>
+                                    <field name="pap_test" string="Papanicolau"/>
+                                    <field name="pap_test_last" string="Último Papanicolau"/>
+                                    <field name="colposcopy" string="Colposcopia"/>
+                                    <field name="colposcopy_last" string="Última colposcopia"/>
+                                </group>
+                            </group>
+                            <group string="Obstetricia">
+                                <group>
+                                    <field name="pregnancies" string="Embarazos"/>
+                                    <field name="born_alive" string="Nacidos vivos"/>
+                                    <field name="premature" string="Prematuros"/>
+                                    <field name="abortions" string="Abortos"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Estilo de Vida">
+                            <notebook>
+                                <page string="Dieta y Ejercicio">
+                                    <group>
+                                        <group string="Ejercicio Físico">
+                                            <field name="excercise" string="Ejercicio"/>
+                                            <field name="excercise_minutes_day" string="Minutos por día"/>
+                                        </group>
+                                        <group string="Sueño">
+                                            <field name="sleep_hours" string="Horas de sueño"/>
+                                        </group>
+                                    </group>
+                                    <group string="Información Dietética">
+                                        <group>
+                                            <field name="number_of_meals" string="Número de comidas"/>
+                                            <field name="coffee" string="Café"/>
+                                            <field name="coffee_cups" string="Tazas de café"/>
+                                        </group>
+                                        <group>
+                                            <field name="soft_drinks" string="Bebidas gaseosas"/>
+                                            <field name="salt" string="Sal"/>
+                                            <field name="diet" string="Dieta"/>
+                                            <field name="diet_info" string="Información adicional"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="smoking" string="Fuma"/>
+                                            <field name="smoking_number" string="Cantidad"/>
+                                            <field name="ex_smoker" string="Exfumador/a"/>
+                                            <field name="second_hand_smoker" string="Fumador/a pasivo/a"/>
+                                            <field name="alcohol" string="Bebe alcohol"/>
+                                            <field name="ex_alcoholic" string="Exalcohólico/a"/>
+                                        </group>
+                                    </group>
+                                    <group string="Información del Estilo de Vida">
+                                        <field name="lifestyle_info" nolabel="1" colspan="2"/>
+                                    </group>
+                                </page>
+
+
+                                <page string="Sexualidad">
+                                    <group>
+                                        <group>
+                                            <field name="anticonceptive" string="Método anticonceptivo"/>
+                                        </group>
+                                    </group>
+                                    <group string="Información adicional sobre sexualidad">
+                                        <field name="sexuality_info" nolabel="1" colspan="2"/>
+                                    </group>
+                                </page>
+
+                            </notebook>
+                        </page>
+
+                        <!--page string="Medicación">
+                            <field name="medication_ids" widget="section_and_note_one2many">
+                                <list>
+                                    <field name="medical_medicament_id" string="Medicamento"/>
+                                    <field name="indication_pathology_id" string="Patología relacionada"/>
+                                    <field name="start_treatment" string="Inicio del tratamiento"/>
+                                    <field name="end_treatment" string="Fin del tratamiento"/>
+                                    <field name="is_active" string="Activo"/>
+                                    <field name="doctor_physician_id" string="Médico responsable"/>
+                                </list>
+                            </field>
+                        </page-->
+
+                        <!--page string="Vacunas">
+                            <field name="medical_vaccination_ids" nolabel="1">
+                                <list>
+                                    <field name="vaccine_product_id" string="Vacuna"/>
+                                    <field name="dose" string="Dosis"/>
+                                    <field name="date" string="Fecha"/>
+                                    <field name="observations" string="Observaciones"/>
+                                </list>
+                            </field>
+                        </page-->
+
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="clinica_core_paciente_tree_view" model="ir.ui.view">
+        <field name="name">clinica.core.paciente.tree.view</field>
+        <field name="model">clinica_core.paciente</field>
+        <field name="arch" type="xml">
+            <list string="Información del Paciente">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="sex" string="Sexo"/>
+                <field name="date_of_birth" string="Fecha de nacimiento"/>
+                <!--field name="primary_care_physician_id" string="Médico de Cabecera"/-->
+            </list>
+        </field>
+    </record>
+
+    <record id="action_clinica_core_paciente" model="ir.actions.act_window">
+        <field name="name">Pacientes</field>
+        <field name="res_model">clinica_core.paciente</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_clinica_core_paciente_code" action="action_clinica_core_paciente"
+              parent="menu_clinica_core_root" sequence="0" />
+
+    <!--record id="action_view_priscription_id2" model="ir.actions.act_window">
+        <field name="name">Órdenes de Prescripción</field>
+        <field name="res_model">medical.prescription.order</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('partner_id', '=', active_id)]</field>
+    </record>
+
+    <record id="action_psc_id" model="ir.actions.act_window">
+        <field name="name">PSC</field>
+        <field name="res_model">clinica_core.paciente.psc</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('partner_id', '=', active_id)]</field>
+    </record>
+
+    <record id="action_view_lab_id" model="ir.actions.act_window">
+        <field name="name">Informes de Laboratorio</field>
+        <field name="res_model">medical.lab</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('partner_id', '=', active_id)]</field>
+    </record-->
+
+</odoo>

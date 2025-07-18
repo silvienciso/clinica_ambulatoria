@@ -1,0 +1,11 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="clinica_core_paciente_sequence" model="ir.sequence">
+            <field name="name">Secuencia de Pacientes</field>
+            <field name="code">seq_clinica_core_paciente</field>
+            <field name="prefix">PAC</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">view.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="string">Contacto Relacionado</attribute>
+            </xpath>
+            <xpath expr="//span[@name='address_name']" position="replace">
+                <span class="o_form_label o_td_label o_address_type">
+                    <span>Dirección</span>
+                </span>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='website']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='title']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='zip']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='lang']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="string">Nro. Documento / RUC</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_id']/.." position="after">
+                <group string="Datos del Socio">
+                    <field name="is_coop_member"/>
+                    <field name="coop_member_num"/>
+                    <field name="coop_member_status"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

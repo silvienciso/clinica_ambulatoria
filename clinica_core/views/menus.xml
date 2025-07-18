@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <menuitem id="menu_clinica_core_root" name="Clínica Ambulatoria"
+                  sequence="10" web_icon="clinica_core,static/description/icon.png"/>
+        <menuitem id="menu_clinica_core_configuracion" name="Configuración" parent="menu_clinica_core_root" sequence="50"/>
+    </data>
+</odoo>
