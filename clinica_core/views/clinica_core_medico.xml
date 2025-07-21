@@ -8,8 +8,9 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="partner_id" context="{'default_is_doctor': 1}"/>
+                            <field name="partner_id" context="{'default_is_doctor': 1}" domain="[('is_company','=',False)]"/>
                             <field name="code"/>
+                            <field name="user_id"/>
                         </group>
                     </group>
                     <group string="Especialidades">
@@ -66,6 +67,7 @@
             name="Médicos"
             parent="menu_clinica_core_configuracion"
             action="action_clinica_core_medico"
-            sequence="10"/>
+            sequence="10"
+            groups="clinica_core.group_administrador_clinica"/>
 
 </odoo>

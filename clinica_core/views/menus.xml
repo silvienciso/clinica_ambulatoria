@@ -1,7 +1,17 @@
 <odoo>
     <data>
         <menuitem id="menu_clinica_core_root" name="Clínica Ambulatoria"
-                  sequence="10" web_icon="clinica_core,static/description/icon.png"/>
-        <menuitem id="menu_clinica_core_configuracion" name="Configuración" parent="menu_clinica_core_root" sequence="50"/>
+                  sequence="10" web_icon="clinica_core,static/description/icon.png"
+                  groups="clinica_core.group_administrador_clinica,clinica_core.group_medico_clinica,clinica_core.group_recepcionista_clinica"/>
+        <menuitem
+                id="menu_clinica_consultorio"
+                name="Mi Consultorio"
+                parent="menu_clinica_core_root"
+                sequence="20"
+                groups="clinica_core.group_administrador_clinica,clinica_core.group_medico_clinica"/>
+
+        <menuitem id="menu_clinica_core_configuracion" name="Configuración" parent="menu_clinica_core_root" sequence="50"
+                  groups="clinica_core.group_administrador_clinica,clinica_core.group_medico_clinica,clinica_core.group_recepcionista_clinica"/>/>
+
     </data>
 </odoo>

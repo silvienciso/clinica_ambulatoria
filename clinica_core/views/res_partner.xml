@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='parent_id']" position="attributes">
                 <attribute name="string">Contacto Relacionado</attribute>
+                <attribute name="domain">[]</attribute>
             </xpath>
             <xpath expr="//span[@name='address_name']" position="replace">
                 <span class="o_form_label o_td_label o_address_type">
@@ -36,9 +37,9 @@
             </xpath>
             <xpath expr="//field[@name='category_id']/.." position="after">
                 <group string="Datos del Socio">
-                    <field name="is_coop_member"/>
-                    <field name="coop_member_num"/>
-                    <field name="coop_member_status"/>
+                    <field name="is_coop_member" readonly="parent_id"/>
+                    <field name="coop_member_num" readonly="parent_id"/>
+                    <field name="coop_member_status" readonly="parent_id"/>
                 </group>
             </xpath>
         </field>

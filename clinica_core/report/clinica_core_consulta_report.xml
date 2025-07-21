@@ -106,7 +106,7 @@
             </t>
         </template>
 
-        <record id="action_report_consulta" model="ir.actions.report">
+        <record id="clinica_core.action_report_consulta" model="ir.actions.report">
             <field name="name">Imprimir Consulta</field>
             <field name="model">clinica_core.consulta</field>
             <field name="report_type">qweb-pdf</field>

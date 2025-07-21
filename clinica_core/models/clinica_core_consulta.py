@@ -12,6 +12,7 @@ class ClinicaCoreConsulta(models.Model):
     appointment_id = fields.Many2one('clinica_core.turno', string="Turno Asociado", required=True, ondelete='cascade')
     patient_id = fields.Many2one(related='appointment_id.patient_id', string="Paciente", store=True, readonly=True)
     doctor_id = fields.Many2one(related='appointment_id.doctor_id', string="Médico", store=True, readonly=True)
+    speciality_id = fields.Many2one(related='appointment_id.speciality_id', string="Especialidad", store=True, readonly=True)
     date = fields.Datetime(string="Fecha de Consulta", default=fields.Datetime.now)
 
     state = fields.Selection([
@@ -27,6 +28,12 @@ class ClinicaCoreConsulta(models.Model):
 
     prescripcion_ids = fields.One2many('clinica_core.prescripcion', 'consultation_id', string="Prescripciones")
     laboratorio_ids = fields.One2many('clinica_core.laboratorio_orden', 'consultation_id', string="Órdenes de Laboratorio")
+
+    is_coop_member = fields.Boolean(string="Es Socio de la Cooperativa", related="patient_id.is_coop_member")
+    coop_member_status = fields.Selection(
+        [('al_dia', 'Al día'), ('atrasado', 'Atrasado')],
+        string="Estado de Socio", related="patient_id.coop_member_status"
+    )
 
     @api.model_create_multi
     def create(self, vals_list):

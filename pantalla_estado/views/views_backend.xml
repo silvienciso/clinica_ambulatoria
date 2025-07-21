@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_mi_estado_form" model="ir.ui.view">
+        <field name="name">mi.estado.form</field>
+        <field name="model">mi_estado</field>
+        <field name="arch" type="xml">
+            <form string="Estado">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mi_estado_list" model="ir.ui.view">
+        <field name="name">mi.estado.list</field>
+        <field name="model">mi_estado</field>
+        <field name="arch" type="xml">
+            <list string="Estado">
+                <field name="name"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_mi_estado" model="ir.actions.act_window">
+        <field name="name">Estados</field>
+        <field name="res_model">mi_estado</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_mi_estado_root" name="Estados" sequence="10"/>
+    <menuitem id="menu_mi_estado" name="Gestión de Estados" parent="menu_mi_estado_root" action="action_mi_estado"/>
+    <menuitem id="menu_mi_estado2" name="Pantalla" parent="menu_mi_estado_root" action="action_client_caja_invoice_selector"/>
+</odoo>

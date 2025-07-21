@@ -18,24 +18,30 @@ Gestión de Clínica Ambulatoria
     'version': '18072025.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','mail','account'],
+    'depends': ['base','mail','account','website'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'data/ir_sequence.xml',
+        'data/res_groups.xml',
+        'data/ir_rule.xml',
         'views/menus.xml',
+        'report/clinica_core_consulta_report.xml',
         'views/clinica_core_consulta.xml',
+        'views/clinica_core_enfermedad.xml',
         'views/clinica_core_especialidad.xml',
         'views/clinica_core_horario.xml',
         'views/clinica_core_medico.xml',
         'views/clinica_core_paciente.xml',
         'views/clinica_core_turno.xml',
         'views/res_partner.xml',
-        'report/clinica_core_consulta_report.xml',
+        'views/queue_display_screen.xml',
+        'views/factura.xml',
     ],
     'assets': {
-        'web.assets_backend': [
+        'web.assets_frontend': [
+            'clinica_core/static/src/queue_listener.js',
         ],
     },
 }

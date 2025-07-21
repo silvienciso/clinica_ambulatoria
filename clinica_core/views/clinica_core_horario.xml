@@ -22,15 +22,16 @@
             <p class="o_view_nocontent_smiling_face">
                 Define un nuevo horario de atención.
             </p><p>
-                Aquí puedes configurar los días y horas en que cada médico atiende una especialidad.
-            </p>
+            Aquí puedes configurar los días y horas en que cada médico atiende una especialidad.
+        </p>
         </field>
     </record>
 
     <menuitem
-        id="menu_clinica_configuracion_horarios"
-        name="Horarios de Atención"
-        parent="menu_clinica_core_configuracion"
-        action="action_clinica_core_horario"
-        sequence="30"/>
+            id="menu_clinica_configuracion_horarios"
+            name="Horarios de Atención"
+            parent="menu_clinica_core_configuracion"
+            action="action_clinica_core_horario"
+            sequence="30"
+            groups="clinica_core.group_administrador_clinica"/>
 </odoo>

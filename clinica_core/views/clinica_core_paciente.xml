@@ -15,6 +15,7 @@
                         </div>
                         <h1>
                             <field name="partner_id"
+                                   domain="[('is_company','=',False)]"
                                    default_focus="1" placeholder="Nombre del paciente"
                                    context="{'default_is_patient': 1,'default_is_person': 1}" />
                         </h1>
@@ -59,9 +60,15 @@
                             </group>
                         </page>
 
-                        <!--page string="Enfermedades">
-                            <field name="patient_disease_ids" nolabel="1" widget="section_and_note_one2many"/>
-                        </page-->
+                        <page string="Condiciones Médicas">
+                            <field name="disease_ids">
+                                <list editable="bottom">
+                                    <field name="patient_id" column_invisible="1"/>
+                                    <field name="disease_id" options="{'no_create_edit': True,'no_create': True}"/>
+                                    <field name="diagnose_date"/>
+                                </list>
+                            </field>
+                        </page>
 
                         <page string="Gineco / Obstetricia" invisible="sex != 'f'">
                             <group string="Ginecología">
@@ -202,26 +209,5 @@
 
     <menuitem id="menu_clinica_core_paciente_code" action="action_clinica_core_paciente"
               parent="menu_clinica_core_root" sequence="0" />
-
-    <!--record id="action_view_priscription_id2" model="ir.actions.act_window">
-        <field name="name">Órdenes de Prescripción</field>
-        <field name="res_model">medical.prescription.order</field>
-        <field name="view_mode">list</field>
-        <field name="domain">[('partner_id', '=', active_id)]</field>
-    </record>
-
-    <record id="action_psc_id" model="ir.actions.act_window">
-        <field name="name">PSC</field>
-        <field name="res_model">clinica_core.paciente.psc</field>
-        <field name="view_mode">list,form</field>
-        <field name="domain">[('partner_id', '=', active_id)]</field>
-    </record>
-
-    <record id="action_view_lab_id" model="ir.actions.act_window">
-        <field name="name">Informes de Laboratorio</field>
-        <field name="res_model">medical.lab</field>
-        <field name="view_mode">list,form</field>
-        <field name="domain">[('partner_id', '=', active_id)]</field>
-    </record-->
 
 </odoo>

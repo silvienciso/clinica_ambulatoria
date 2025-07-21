@@ -1,0 +1,15 @@
+<odoo>
+
+    <record model="res.groups" id="group_administrador_clinica">
+        <field name="name">Administrador de Clínica</field>
+    </record>
+
+    <record model="res.groups" id="group_medico_clinica">
+        <field name="name">Médico</field>
+    </record>
+
+    <record model="res.groups" id="group_recepcionista_clinica">
+        <field name="name">Recepcionista</field>
+    </record>
+
+</odoo>

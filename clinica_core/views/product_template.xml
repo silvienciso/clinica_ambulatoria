@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <template id="my_product_price_page" name="Página de Precio de Producto">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container my-5">
+                        <div class="product_price_container" t-att-data-product-id="product.id">
+                            <h3>Producto: <t t-esc="product.name"/></h3>
+                            <p>
+                                Precio Actual:
+                                <strong class="product_price_display"
+                                        t-esc="product.list_price"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

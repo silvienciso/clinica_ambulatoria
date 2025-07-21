@@ -1,0 +1,8 @@
+<odoo>
+    <data noupdate="1">
+        <record id="pantalla_estado.action_client_caja_invoice_selector" model="ir.actions.client">
+            <field name="name">Selección de Facturas JS</field>
+            <field name="tag">your_custom_component</field>
+        </record>
+    </data>
+</odoo>

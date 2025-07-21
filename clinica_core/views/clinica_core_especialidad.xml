@@ -80,6 +80,7 @@
             name="Especialidades"
             parent="menu_clinica_core_configuracion"
             action="action_clinica_core_especialidad"
-            sequence="20"/>
+            sequence="20"
+            groups="clinica_core.group_administrador_clinica"/>
 
 </odoo>

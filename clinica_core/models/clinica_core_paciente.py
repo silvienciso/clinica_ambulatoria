@@ -98,7 +98,7 @@ class ClinicaCorePaciente(models.Model):
     # -------------------------------------------------------------------------
 
     # Nota: Estos son los campos que conectarán con los otros modelos que refactorizarás.
-    # disease_ids = fields.One2many('clinica_core.paciente.enfermedad', 'paciente_id', string="Enfermedades y Alergias")
+    disease_ids = fields.One2many('clinica_core.paciente_enfermedad', 'patient_id', string="Condiciones médicas")
     # medication_ids = fields.One2many('clinica_core.paciente.medicacion', 'paciente_id', string="Medicación Histórica")
     # vaccination_ids = fields.One2many('clinica_core.paciente.vacuna', 'paciente_id', string="Vacunas")
     # appointment_ids = fields.One2many('clinica_core.turno', 'paciente_id', string="Turnos Previos")

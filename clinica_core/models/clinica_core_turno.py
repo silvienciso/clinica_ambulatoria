@@ -62,6 +62,12 @@ class ClinicaCoreTurno(models.Model):
             else:
                 turno.end_datetime = False
 
+    @api.onchange('speciality_id')
+    @api.depends('speciality_id')
+    def _onchange_speciality(self):
+        for record in self:
+            record.doctor_id = False
+
     @api.constrains('doctor_id', 'start_datetime', 'end_datetime')
     def _check_horario_y_solapamiento(self):
         """
@@ -90,7 +96,7 @@ class ClinicaCoreTurno(models.Model):
             ])
 
             if not horarios_validos:
-                result = '{0:02.0f}:{1:02.0f}'.format(*divmod(hora_inicio_turno * 60, 60))
+                result = '{0:02.0f}:{1:02.0f}'.format(*divmod(hora_inicio_turno * 60 - 60, 60))
                 raise ValidationError(_(
                     "El turno para el Dr. %s el día %s a las %s no se encuentra dentro de ningún horario de atención definido.",
                     turno.doctor_id.partner_id.name,
@@ -154,6 +160,15 @@ class ClinicaCoreTurno(models.Model):
             turno.invoice_id = new_invoice.id
             return new_invoice
 
+    def update_queue_screen(self):
+        notification_payload = {
+            'id': self.id,
+            'state': self.state
+        }
+
+        # Envía la notificación a través del bus del sistema
+        self.env['bus.bus']._sendone('queue_channel', 'queue_update', notification_payload)
+
     # -------------------------------------------------------------------------
     # ACCIONES DE BOTONES DE ESTADO
     # -------------------------------------------------------------------------
@@ -164,6 +179,7 @@ class ClinicaCoreTurno(models.Model):
     def action_send_to_queue(self):
         self.write({'state': 'in_queue'})
         self._create_invoice()
+        self.update_queue_screen()
         return {
             'type': 'ir.actions.act_window',
             'name': 'Factura',
@@ -175,9 +191,13 @@ class ClinicaCoreTurno(models.Model):
 
     def action_start_consultation(self):
         self.write({'state': 'in_progress'})
+        self.update_queue_screen()
+
 
     def action_finish(self):
         self.write({'state': 'done'})
+        self.update_queue_screen()
+
 
     def action_cancel(self):
         self.write({'state': 'cancelled'})

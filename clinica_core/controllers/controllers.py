@@ -1,22 +1,29 @@
-# -*- coding: utf-8 -*-
-# from odoo import http
+# en tu_modulo/controllers/main.py
+import datetime
 
+from odoo import http
+from odoo.http import request
 
-# class ClinicaCore(http.Controller):
-#     @http.route('/clinica_core/clinica_core', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+class ProductPageController(http.Controller):
 
-#     @http.route('/clinica_core/clinica_core/objects', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('clinica_core.listing', {
-#             'root': '/clinica_core/clinica_core',
-#             'objects': http.request.env['clinica_core.clinica_core'].search([]),
-#         })
+    @http.route('/pantalla_espera', type='http', auth="public", website=True)
+    def show_queue_display(self, **kw):
+        """
+        Renderiza la página inicial de la cola de espera.
+        """
+        # Obtenemos los turnos que nos interesan
+        fecha_hoy = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
-#     @http.route('/clinica_core/clinica_core/objects/<model("clinica_core.clinica_core"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('clinica_core.object', {
-#             'object': obj
-#         })
+        en_consulta = request.env['clinica_core.turno'].sudo().search([
+            ('state', '=', 'in_progress'),
+        ], order='start_datetime', limit=5)
 
+        en_espera = request.env['clinica_core.turno'].sudo().search([
+            ('state', '=', 'in_queue'),
+        ], order='start_datetime', limit=10)
+
+        # Renderizamos la plantilla QWeb con los datos
+        return request.render('clinica_core.queue_display_template', {
+            'en_consulta': en_consulta,
+            'en_espera': en_espera,
+        })

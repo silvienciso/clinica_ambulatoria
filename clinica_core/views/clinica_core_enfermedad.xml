@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_clinica_core_enfermedad_list" model="ir.ui.view">
+        <field name="name">clinica.core.enfermedad.list</field>
+        <field name="model">clinica_core.enfermedad</field>
+        <field name="arch" type="xml">
+            <list string="Condiciones Médicas" editable="bottom">
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_clinica_core_enfermedad" model="ir.actions.act_window">
+        <field name="name">Condiciones Médicas</field>
+        <field name="res_model">clinica_core.enfermedad</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define una nueva condición de salud.
+            </p><p>
+                Aquí puedes configurar las condiciones de salud.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_clinica_enfermedad"
+        name="Condiciones Médicas"
+        parent="menu_clinica_core_configuracion"
+        action="action_clinica_core_enfermedad"
+        sequence="40"/>
+</odoo>

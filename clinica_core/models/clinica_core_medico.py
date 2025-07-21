@@ -20,6 +20,8 @@ class ClinicaCoreMedico(models.Model):
         help="Contacto de Odoo asociado a este profesional."
     )
 
+    user_id = fields.Many2one('res.users', string='Usuario del Sistema')
+
     code = fields.Char(string='Matrícula o Identificador')
 
     speciality_ids = fields.Many2many(
