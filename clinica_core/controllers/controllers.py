@@ -27,3 +27,17 @@ class ProductPageController(http.Controller):
             'en_consulta': en_consulta,
             'en_espera': en_espera,
         })
+
+    @http.route('/queue/partial', auth='public', type='http', website=True)
+    def queue_partial(self):
+        en_consulta = request.env['clinica_core.turno'].sudo().search([
+            ('state', '=', 'in_progress'),
+        ], order='start_datetime', limit=5)
+
+        en_espera = request.env['clinica_core.turno'].sudo().search([
+            ('state', '=', 'in_queue'),
+        ], order='start_datetime', limit=10)
+        return request.render('clinica_core.queue_partial_template', {
+            'en_consulta': en_consulta,
+            'en_espera': en_espera,
+        })

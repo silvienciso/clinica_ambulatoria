@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <template id="clinica_core.queue_partial_template">
+        <div class="queue_container">
+            <div class="row justify-content-center" style="margin-top: 30px;">
+                <div class="col-10">
+                    <h2 style="text-align: center; font-size: 2.5em; color: #FFD700;">EN CONSULTA</h2>
+                    <t t-foreach="en_consulta" t-as="turno" t-esc-options='{"escape": false}'>
+                        <div t-attf-class="en-consulta" style="background-color: #005A9C; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center;">
+                            <div style="font-size: 4em; font-weight: bold;" class="paciente-name">
+                                <t t-esc="turno.patient_id.partner_id.name"/>
+                            </div>
+                            <div style="font-size: 2em; color: #DDDDDD;" class="doctor-name">
+                                Dr. <t t-esc="turno.doctor_id.partner_id.name"/>
+                            </div>
+                            <div style="font-size: 1.8em; color: #DDDDDD;" class="especialidad">
+                                <t t-esc="turno.speciality_id.name"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+            <div class="row justify-content-center" style="margin-top: 20px;">
+                <div class="col-10">
+                    <h2 style="text-align: center; font-size: 2.5em; color: #FFD700;">PRÓXIMOS</h2>
+                    <t t-foreach="en_espera" t-as="turno">
+                        <div style="background-color: #004B8D; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center;">
+                            <div style="font-size: 2.5em;" class="paciente-name"><t t-esc="turno.patient_id.partner_id.name"/></div>
+                            <div style="font-size: 1.5em; color: #CCCCCC;">Dr(a). <t t-esc="turno.doctor_id.partner_id.name"/></div>
+                            <div style="font-size: 1.8em; color: #DDDDDD;"><t t-esc="turno.speciality_id.name"/></div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </template>
     <template id="clinica_core.queue_display_template" name="Pantalla de Cola de Espera">
         <t t-call="website.layout">
             <div id="wrap" class="oe_structure">
@@ -25,19 +60,7 @@
                     }
                 </style>
                 <script type="text/javascript">
-                    function leerTurnoActual() {
-                        const paciente = document.querySelector(".en-consulta .paciente-name")?.innerText || "";
-                        const doctor = document.querySelector(".en-consulta .doctor-name")?.innerText || "";
-                        const especialidad = document.querySelector(".en-consulta .especialidad")?.innerText || "";
 
-                        const texto = `Llamando a ${paciente}. Con ${doctor}, especialista en ${especialidad}.`;
-
-                        if (texto.trim() !== "") {
-                            const voz = new SpeechSynthesisUtterance(texto);
-                            voz.lang = "es-ES";
-                            speechSynthesis.speak(voz);
-                        }
-                    }
                 </script>
                 <div class="container-fluid" style="background-color: #003366; color: white; font-family: Arial, sans-serif;">
                     <div class="row text-center align-items-center" style="padding: 20px;">
@@ -47,43 +70,10 @@
                         <div class="col-4">
                             <h1 style="font-size: 3em; font-weight: bold;" id="texto">SALA DE ESPERA</h1>
                         </div>
-                        <button type="button" onclick="leerTurnoActual()">Escuchar</button>
                         <div class="col-4"/>
                     </div>
 
-                    <div class="queue_container">
-                        <div class="row justify-content-center" style="margin-top: 30px;">
-                            <div class="col-10">
-                                <h2 style="text-align: center; font-size: 2.5em; color: #FFD700;">EN CONSULTA</h2>
-                                <t t-foreach="en_consulta" t-as="turno" t-esc-options='{"escape": false}'>
-                                    <div t-attf-class="en-consulta" style="background-color: #005A9C; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center;">
-                                        <div style="font-size: 4em; font-weight: bold;" class="paciente-name">
-                                            <t t-esc="turno.patient_id.partner_id.name"/>
-                                        </div>
-                                        <div style="font-size: 2em; color: #DDDDDD;" class="doctor-name">
-                                            Dr. <t t-esc="turno.doctor_id.partner_id.name"/>
-                                        </div>
-                                        <div style="font-size: 1.8em; color: #DDDDDD;" class="especialidad">
-                                            <t t-esc="turno.speciality_id.name"/>
-                                        </div>
-                                    </div>
-                                </t>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-center" style="margin-top: 20px;">
-                            <div class="col-10">
-                                <h2 style="text-align: center; font-size: 2.5em; color: #FFD700;">PRÓXIMOS</h2>
-                                <t t-foreach="en_espera" t-as="turno">
-                                    <div style="background-color: #004B8D; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center;">
-                                        <div style="font-size: 2.5em;" class="paciente-name"><t t-esc="turno.patient_id.partner_id.name"/></div>
-                                        <div style="font-size: 1.5em; color: #CCCCCC;">Dr(a). <t t-esc="turno.doctor_id.partner_id.name"/></div>
-                                        <div style="font-size: 1.8em; color: #DDDDDD;"><t t-esc="turno.speciality_id.name"/></div>
-                                    </div>
-                                </t>
-                            </div>
-                        </div>
-                    </div>
+                    <t t-call="clinica_core.queue_partial_template"/>
                 </div>
             </div>
         </t>
